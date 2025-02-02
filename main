@@ -1,0 +1,67 @@
+import java.util.Stack;
+
+public class Main {
+
+    public static void main(String args[]) {
+        Stack stack = new Stack();
+        stack.push(61);
+        stack.push(6);
+        stack.push(-42);
+        stack.push(3);
+        stack.push(24);
+        stack.push(5);
+        stack.push(123);
+        stack.push(100);
+        stack.push(0);
+
+        sort(stack);
+
+        System.out.println(stack);
+    }
+
+    public static void sort(Stack stack) {
+        Stack n1 = new Stack();
+        Stack n2 = new Stack();
+
+        while (stack.size() != 0) {
+            if (stack.size() % 2 == 0) {
+                n1.push(stack.pop());
+            } else {
+                n2.push(stack.pop());
+            }
+        }
+
+        if (n1.size() > 1) {
+            sort(n1);
+        }
+
+        if (n2.size() > 1) {
+            sort(n2);
+        }
+
+        merge(n1, n2, stack);
+    }
+
+    public static void merge(Stack n1, Stack n2, Stack stack) {
+        Stack mergedStack = new Stack();
+        while (!n1.isEmpty() && !n2.isEmpty()) {
+            if ((Integer) n1.peek() < (Integer) n2.peek()) {
+                mergedStack.push(n2.pop());
+            } else {
+                mergedStack.push(n1.pop());
+            }
+        }
+
+        while (!n1.isEmpty()) {
+            mergedStack.push(n1.pop());
+        }
+
+        while (!n2.isEmpty()) {
+            mergedStack.push(n2.pop());
+        }
+
+        while (!mergedStack.isEmpty()) {
+            stack.push(mergedStack.pop());
+        }
+    }
+}
