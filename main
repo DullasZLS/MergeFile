@@ -16,7 +16,7 @@ public class Main {
 
         sort(stack);
 
-        System.out.println(stack);
+        System.out.println("Your sort-a merged stack: " + stack);
     }
 
     public static void sort(Stack stack) {
